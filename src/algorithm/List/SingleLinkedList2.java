@@ -2,45 +2,37 @@ package algorithm.List;
 
 import core.List.AbstractList;
 
-//单链表
-public class SingleLinkedList<E> extends AbstractList<E> {
+//带有虚拟头节点的单链表
+public class SingleLinkedList2<E> extends AbstractList<E> {
 	
 	private Node<E> first;
 
+	public SingleLinkedList2() {
+		first = new Node<E>(null, null);
+	} 
 
 	@Override
 	public void add(int index, E element) {
 		rangeCheckForAdd(index);
 		
-		if(index == 0) {
-			first = new Node<E>(element, first);
-		} else {
-			Node<E> prevNode = getNodeByIndex(index - 1);
-			Node<E> newNode = new Node<E>(element, prevNode.next);
-			prevNode.next = newNode;
-		}
+		Node<E> prevNode = index == 0 ? first : getNodeByIndex(index - 1);
+		prevNode.next = new Node<E>(element, prevNode.next);
 		size++;
 	}
+
 
 
 	@Override
 	public E remove(int index) {
 		rangeCheck(index);
 		
-		//���o(1) �o(n) ƽ��o(n)
-
-		Node<E> removeNode = first;
-		if(index == 0) {
-			first = first.next;
-		} else {
-			Node<E> prevNode = getNodeByIndex(index - 1);
-			removeNode = prevNode.next;
-			prevNode.next = removeNode.next;
-		}
+		Node<E> prevNode = index == 0 ? first : getNodeByIndex(index - 1);
+		Node<E> oldNode = prevNode.next;
+		prevNode.next = oldNode.next;
 		
 		size--;
 		
-		return removeNode.element;
+		return oldNode.element;
 	}
 
 
@@ -52,7 +44,6 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 
 	@Override
 	public E set(int index, E element) {
-		// �����o(1) �o(n) ƽ��o(n)
 		Node<E> oldNode = getNodeByIndex(index);
 		E oldElement = oldNode.element;
 		
@@ -63,7 +54,7 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 
 	@Override
 	public int indexOf(E element) {
-		Node<E> node = first;
+		Node<E> node = first.next;
 		
 		if (element == null) {
 			for(int i = 0; i < size; i++) {
@@ -88,14 +79,14 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 	@Override
 	public void clear() {
 		size = 0;
-		first = null;
+		first.next = null;
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder string = new StringBuilder();
 		string.append("size=").append(size).append(", [");
-		Node<E> node = first;
+		Node<E> node = first.next;
 		for (int i = 0; i < size; i++) {
 			if (i != 0) {
 				string.append(", ");
@@ -118,7 +109,7 @@ public class SingleLinkedList<E> extends AbstractList<E> {
 	
 	private Node<E> getNodeByIndex(int index){
 		rangeCheck(index);
-		Node<E> node = first;
+		Node<E> node = first.next;
 		for(int i = 0; i < index; i++) {
 			node = node.next;
 		}

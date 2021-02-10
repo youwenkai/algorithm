@@ -1,7 +1,7 @@
 package algorithm;
 
 //import algorithm.List.ArrayList;
-import algorithm.List.SingleLinkedList;
+import algorithm.List.SingleLinkedList2;
 
 public class main {
 
@@ -17,7 +17,7 @@ public class main {
 //
 //		System.out.println(list.indexOf(null));
 		
-		SingleLinkedList<Object> list = new SingleLinkedList<>();
+		SingleLinkedList2<Object> list = new SingleLinkedList2<>();
 		
 		list.add(new Person(10, "Jack"));
 		list.add(null);
@@ -34,6 +34,9 @@ public class main {
 //		System.out.println(list.set(0, null));
 
 		System.out.println(list.get(list.size() -  1));
+		System.out.println(list);
+		
+		list.clear();
 		System.out.println(list);
 	}
 
