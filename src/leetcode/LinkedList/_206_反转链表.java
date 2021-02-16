@@ -1,4 +1,4 @@
-package leetcode.链表;
+package leetcode.LinkedList;
 
 /**
  *  输入: 1->2->3->4->5->NULL

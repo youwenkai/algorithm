@@ -1,4 +1,4 @@
-package leetcode.链表;
+package leetcode.LinkedList;
 
 public class _203_删除链表中等于给定值的所有节点 {
 
