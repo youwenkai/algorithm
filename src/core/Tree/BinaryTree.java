@@ -8,18 +8,18 @@ import javax.xml.soap.Node;
 
 @SuppressWarnings("unused")
 public class BinaryTree<E> {
-	private Node<E> root;
-	private int size;
+	protected Node<E> root;
+	protected int size;
 	
-	public int size() {
+	protected int size() {
 		return size;
 	}
 	
-	public boolean isEmpty() {
+	protected boolean isEmpty() {
 		return size == 0;
 	}
 	
-	public void clear() {
+	protected void clear() {
 		size = 0;
 		root = null;
 	}
@@ -29,7 +29,7 @@ public class BinaryTree<E> {
 	 * 前序遍历 访问顺序 根节点 左子树 右子树
 	 * 递归方式
 	 * */
-	public void preorderTraversalByRecursive(Visitor<E> visitor) {
+	protected void preorderTraversalByRecursive(Visitor<E> visitor) {
 		if(visitor == null) return;
 		preorderTraversal(root, visitor);
 	}
@@ -47,7 +47,7 @@ public class BinaryTree<E> {
 	/**
 	 * 前序遍历 迭代方式1
 	 * */
-	public void preorderTraversal() {
+	protected void preorderTraversal() {
 		Node<E> node = root;
 		Stack<Node<E>> stack = new Stack<>();
 		while (true) {
@@ -70,7 +70,7 @@ public class BinaryTree<E> {
 	 * 前序遍历 迭代方式2
 	 * */
 
-	public void preorderTraversal1() {
+	protected void preorderTraversal1() {
 		Stack<Node<E>> stack = new Stack<>();
 		stack.push(root);
 		
@@ -93,7 +93,7 @@ public class BinaryTree<E> {
 	 * 中序遍历 访问顺序 左子树 根节点 右子树
 	 * 递归方式
 	 * */
-	public void inorderTraversalByRecursive(Visitor<E> visitor) {
+	protected void inorderTraversalByRecursive(Visitor<E> visitor) {
 		if(visitor == null) return;
 		inorderTraversal(root, visitor);
 	}
@@ -109,7 +109,7 @@ public class BinaryTree<E> {
 	/**
 	 * 中序遍历 非递归方式
 	 * */
-	public void inorderTraversal() {
+	protected void inorderTraversal() {
 		Node<E> node = root;
 		Stack<Node<E>> stack = new Stack<>();
 		while (true) {
@@ -129,7 +129,7 @@ public class BinaryTree<E> {
 	 * 后序遍历 访问顺序 左子树 右子树 根节点
 	 * 递归方式
 	 * */
-	public void postorderTraversalByRecursive(Visitor<E> visitor) {
+	protected void postorderTraversalByRecursive(Visitor<E> visitor) {
 		if(visitor == null) return;
 		postorderTraversal(root, visitor);
 	}
@@ -146,7 +146,7 @@ public class BinaryTree<E> {
 	/**
 	 * 后序遍历 迭代方式
 	 * */
-	public void postorderTraversal(Visitor<E> visitor) {
+	protected void postorderTraversal(Visitor<E> visitor) {
 		if(root == null || visitor == null) return;
 		Stack<Node<E>> stack = new Stack<>();
 		
@@ -173,7 +173,7 @@ public class BinaryTree<E> {
 	/**
 	 * 层序遍历 访问顺序 从上到下 从左到右
 	 * */
-	public void levelorderTraversal(Visitor<E> visitor) {
+	protected void levelorderTraversal(Visitor<E> visitor) {
 		if(root == null || visitor == null) return; 
 		// 利用队列的性质 先进先出
 		// 先将根节点入队
@@ -198,7 +198,7 @@ public class BinaryTree<E> {
 	/**
 	 * 判断一棵树是否是完全二叉树
 	 * */
-	public boolean isComplete() {
+	protected boolean isComplete() {
 		if(root == null) return false;
 		
 		Queue<Node<E>> queue = new LinkedList<>();
@@ -232,7 +232,7 @@ public class BinaryTree<E> {
 	 * 求二叉树的高度 利用层序遍历 
 	 * 迭代方法
 	 * */
-	public int height() {
+	protected int height() {
 		if(root == null) return 0;
 		// 树的高度
 		int height = 0;
@@ -259,7 +259,7 @@ public class BinaryTree<E> {
 	/**
 	 * 求二叉树的高度 递归方法
 	 * */
-	public int heightByRecursive() {
+	protected int heightByRecursive() {
 		return height(root);
 	}
 	
@@ -272,7 +272,7 @@ public class BinaryTree<E> {
 	/**
 	 * 前驱节点 中序遍历中 小于此值的最大值
 	 * */
-	public Node<E> predecessor(Node<E> node) {
+	protected Node<E> predecessor(Node<E> node) {
 		if(node == null) return null;
 		
 		// 前驱节点在左子树上(node.left.right.right...)
@@ -295,7 +295,7 @@ public class BinaryTree<E> {
 	/**
 	 * 后继节点 中序遍历中 大于此值的最小值
 	 * */
-	public Node<E> successor(Node<E> node) {
+	protected Node<E> successor(Node<E> node) {
 		if(node == null) return null;
 		
 		// 后继节点在右子树上(node.right.left.left......)
@@ -316,7 +316,7 @@ public class BinaryTree<E> {
 		return node.parent;
 	}
 	
-	private static class Node<E> {
+	protected static class Node<E> {
 		E element;
 		Node<E> left;
 		Node<E> right;
@@ -331,6 +331,12 @@ public class BinaryTree<E> {
 		 * */
 		public boolean isLeaf() {
 			return left == null && right == null;
+		}
+		/**
+		 * 度为2
+		 * */
+		public boolean hasTwoChildren() {
+			return left != null && right != null;
 		}
 	}
 	
