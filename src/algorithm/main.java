@@ -1,5 +1,8 @@
 package algorithm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import algorithm.List.Stack;
 import algorithm.List.Circle.CircleLinkedList;
 import algorithm.List.Queue.Circle.CircleDeque;
@@ -122,12 +125,12 @@ public class main {
 		
 //		System.out.println(queue);
 		
-		_232_用栈实现队列 a = new _232_用栈实现队列();
-		
-		a.push(1);
-		a.push(2);
-		
-		System.out.println(a.peek());
+//		_232_用栈实现队列 a = new _232_用栈实现队列();
+//		
+//		a.push(1);
+//		a.push(2);
+//		
+//		System.out.println(a.peek());
 	}
 
 }
