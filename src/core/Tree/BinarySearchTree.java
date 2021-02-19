@@ -20,8 +20,10 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
 		
 		// 如果根节点是null
 		if(root == null) {
-			root = new Node<E>(element, null);
+			root = createNode(element, null);
 			size++;
+			// 新添加节点后的操作
+			afterAdd(root);
 			return;
 		}
 		
@@ -44,13 +46,15 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
 		}
 		
 		// 添加节点
-		Node<E> newNode = new Node<E>(element, parent);
+		Node<E> newNode = createNode(element, parent);
 		if(cmp > 0) {
 			parent.right = newNode;
 		} else if(cmp < 0) {
 			parent.left = newNode;
 		}
 		size++;
+		// 新添加节点后的操作
+		afterAdd(newNode);
 	}
 	
 	public void remove(E element) {
@@ -88,14 +92,21 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
 			} else {
 				node.parent.right = replacement;
 			}
+			
+			// 删除节点之后的处理
+			afterRemove(node);
 		} else if(node.parent == null) {// node的是根节点
 			root = null;
+			// 删除节点之后的处理
+			afterRemove(node);
 		} else { // node 为叶子节点 直接删除
 			if(node == node.parent.left) {
 				node.parent.left = null;
 			} else {
 				node.parent.right = null;
 			}
+			// 删除节点之后的处理
+			afterRemove(node);
 		}
 		
 	}
@@ -128,6 +139,17 @@ public class BinarySearchTree<E> extends BinaryTree<E> {
 			return ((Comparable<E>)e1).compareTo(e2);
 		}
 	}
+	/**
+	 * 添加node之后的调整
+	 * @param node 新添加的节点
+	 */
+	protected void afterAdd(Node<E> node) {}
+
+	/**
+	 * 删除node之后的调整
+	 * @param node 被删除的节点
+	 */
+	protected void afterRemove(Node<E> node) {}
 	
 	private void elementNotNullCheck(E element) {
 		if(element == null) {
